@@ -18,6 +18,8 @@ target_sources(cantankerous-fw PUBLIC
     "${SdkDir}/devices/LPC5514/gcc/startup_LPC5514.S"
     "${SdkDir}/devices/LPC5514/system_LPC5514.c"
     "${SdkDir}/drivers/lpc_gpio/fsl_gpio.c"
+    "${ProjDirPath}/middleware/usb/device/usb_device_lpcip3511.c"
+    "${ProjDirPath}/middleware/usb/phy/usb_phy.c"
 )
 
 target_compile_definitions(cantankerous-fw PRIVATE
@@ -29,17 +31,21 @@ target_compile_definitions(cantankerous-fw PRIVATE
     "FSL_OSA_BM_TIMER_CONFIG=0"
     "SERIAL_PORT_TYPE_UART=1"
     "SDK_DELAY_USE_DWT=1"
-    $<IF:$<CONFIG:Debug>,DEBUG,NDEBUG>
+    "$<IF:$<CONFIG:Debug>,DEBUG,NDEBUG>"
 )
 
 target_include_directories(cantankerous-fw PRIVATE
-    ${ProjDirPath}
-    ${SdkDir}/CMSIS/Core/Include
-    ${SdkDir}/devices/LPC5514
-    ${SdkDir}/devices/LPC5514/drivers
-    ${SdkDir}/drivers/common
-    ${SdkDir}/drivers/lpc_gpio
-    ${SdkDir}/drivers/lpc_iocon
+    "${ProjDirPath}"
+    "${SdkDir}/CMSIS/Core/Include"
+    "${SdkDir}/devices/LPC5514"
+    "${SdkDir}/devices/LPC5514/drivers"
+    "${SdkDir}/drivers/common"
+    "${SdkDir}/drivers/lpc_gpio"
+    "${SdkDir}/drivers/lpc_iocon"
+    "${SdkDir}/components/osa"
+    "${SdkDir}/components/lists"
+    "${ProjDirPath}/middleware/usb/include"
+    "${ProjDirPath}/middleware/usb/output/npw/device_config/ip3511hs" # todo - replace with a stripped down config
 )
 
 target_compile_options(cantankerous-fw PRIVATE

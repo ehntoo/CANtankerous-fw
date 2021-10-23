@@ -1,0 +1,18 @@
+This directory was originally sourced from the MCUXpresso SDK, release 2.10.1.
+This is what I could find regarding licensing:
+
+```
+usb                        Name: USB                                         
+                           Version: 2.8.0                                    
+                           Outgoing License: BSD-3-Clause                    
+                           License File: COPYING-BSD-3                       
+                           Format: source code                               
+                           Description: NXP USB stack. This is a version of  
+                           the USB stack that has been integrated with the   
+                           MCUXpresso SDK.                                   
+                           Location: middleware/usb                          
+                           Origin: NXP (BSD-3-Clause)                        
+```
+
+I am accordingly reproducing the 3-Clause BSD license included with the
+original SDK and using the stack under those terms.
