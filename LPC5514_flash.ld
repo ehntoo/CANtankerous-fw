@@ -134,6 +134,15 @@ SECTIONS
   __etext = .;    /* define a global symbol at end of code */
   __DATA_ROM = .; /* Symbol is used by startup for data initialization */
 
+  /* Place stack at beginning of RAM for free stack overflow protection */
+  .stack :
+  {
+    __StackLimit = .;
+    . = ALIGN(8);
+    . += STACK_SIZE;
+    __StackTop = .;
+  } > m_data
+
   .data : AT(__DATA_ROM)
   {
     . = ALIGN(4);
@@ -177,12 +186,6 @@ SECTIONS
     __heap_limit = .; /* Add for _sbrk */
   } > m_data
 
-  .stack :
-  {
-    . = ALIGN(8);
-    . += STACK_SIZE;
-  } > m_data
-
   m_usb_bdt (NOLOAD) :
   {
     . = ALIGN(512);
@@ -195,12 +198,8 @@ SECTIONS
   } > m_usb_sram
 
   /* Initializes stack on the end of block */
-  __StackTop   = ORIGIN(m_data) + LENGTH(m_data);
-  __StackLimit = __StackTop - STACK_SIZE;
   PROVIDE(__stack = __StackTop);
 
   .ARM.attributes 0 : { *(.ARM.attributes) }
-
-  ASSERT(__StackLimit >= __HeapLimit, "region m_data overflowed with stack and heap")
 }
 
