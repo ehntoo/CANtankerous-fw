@@ -7,6 +7,7 @@
 #include "board/pin_mux.h"
 #include "board.h"
 #include "fsl_power.h"
+#include "cmsis_compiler.h"
 
 void APPInit() {
     return;
@@ -57,4 +58,17 @@ int main(void) {
     {
         APPTask();
     }
+}
+
+void __assert_func(const char *file,
+                   int line,
+                   const char *func,
+                   const char *failedexpr) {
+    /* snprintf(g_assert_info.msg, sizeof(g_assert_info.msg), */
+    /*         "ASSERT: %s at %s\n", failedexpr, func); */
+    /* strncpy(g_assert_info.file, file, sizeof(g_assert_info.file)); */
+    /* g_assert_info.line = line; */
+
+    __BKPT(1);
+    while(1) {};
 }

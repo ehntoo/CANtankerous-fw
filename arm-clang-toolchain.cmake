@@ -15,8 +15,6 @@ set(CMAKE_C_FLAGS "-nostdlib")
 set(CMAKE_C_FLAGS_DEBUG "-Og")
 set(CMAKE_C_FLAGS_RELEASE "-O3")
 set(CMAKE_C_FLAGS_MINSIZEREL "-Oz")
-# set(CMAKE_CXX_FLAGS ${CMAKE_C_FLAGS})
-set(CMAKE_ASM_FLAGS "-D_start=main")
 
 # Do not try to compile for the host
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
@@ -27,3 +25,13 @@ execute_process(
   OUTPUT_VARIABLE CMAKE_SYSROOT
   OUTPUT_STRIP_TRAILING_WHITESPACE
 )
+
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--defsym=_start=main")
+# set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L${CMAKE_SYSROOT}/../lib/gcc/arm-none-eabi/10.3.1/thumb/v8-m.main+fp/hard")
+# set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -L ${CMAKE_SYSROOT}/lib/thumb/v8-m.main+fp/hard")
+#
+# execute_process(
+#   COMMAND arm-none-eabi-gcc --print-libgcc-file-name ${CMAKE_C_FLAGS}
+#   OUTPUT_VARIABLE CMAKE_EXE_LINKER_FLAGS
+#   OUTPUT_STRIP_TRAILING_WHITESPACE
+# )

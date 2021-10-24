@@ -15,9 +15,11 @@ target_sources(cantankerous-fw PUBLIC
     "${ProjDirPath}/board/pin_mux.c"
     "${SdkDir}/devices/LPC5514/drivers/fsl_clock.c"
     "${SdkDir}/drivers/common/fsl_common_arm.c"
-    "${ProjDirPath}/startup.S"
-    "${ProjDirPath}/irq.c"
-    "${SdkDir}/devices/LPC5514/system_LPC5514.c"
+    # "${ProjDirPath}/startup.S"
+    # "${ProjDirPath}/irq.c"
+    "${ProjDirPath}/startup.c"
+    # "${SdkDir}/devices/LPC5514/system_LPC5514.c"
+    "${ProjDirPath}/system_LPC5514.c"
     "${SdkDir}/drivers/lpc_gpio/fsl_gpio.c"
     "${ProjDirPath}/middleware/usb/device/usb_device_lpcip3511.c"
     "${ProjDirPath}/middleware/usb/phy/usb_phy.c"
@@ -75,7 +77,7 @@ target_link_options(cantankerous-fw PRIVATE
     -g3
     -ffunction-sections
     -fdata-sections
-    -std=gnu99
+    -std=c99
     -fshort-wchar
     -fno-common
     -ffreestanding
@@ -89,7 +91,7 @@ target_link_options(cantankerous-fw PRIVATE
     "-Wl,-Map=$<TARGET_FILE_DIR:cantankerous-fw>/cantankerous-fw.map"
 )
 
-target_link_options(cantankerous-fw PRIVATE "-T${ProjDirPath}/LPC5514_flash.ld" -static)
+target_link_options(cantankerous-fw PRIVATE "-T${ProjDirPath}/linker.ld" -static)
 
 target_link_libraries(cantankerous-fw
     ${SdkDir}/devices/LPC5514/gcc/libpower_hardabi.a
