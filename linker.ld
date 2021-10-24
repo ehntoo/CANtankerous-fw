@@ -26,24 +26,6 @@
  *-------- <<< Use Configuration Wizard in Context Menu >>> -------------------
  */
 
-/*---------------------- Flash Configuration ----------------------------------
-  <h> Flash Configuration
-    <o0> Flash Base Address <0x0-0xFFFFFFFF:8>
-    <o1> Flash Size (in Bytes) <0x0-0xFFFFFFFF:8>
-  </h>
-  -----------------------------------------------------------------------------*/
-__ROM_BASE = 0x00000000;
-__ROM_SIZE = 0x00020000;
-
-/*--------------------- Embedded RAM Configuration ----------------------------
-  <h> RAM Configuration
-    <o0> RAM Base Address    <0x0-0xFFFFFFFF:8>
-    <o1> RAM Size (in Bytes) <0x0-0xFFFFFFFF:8>
-  </h>
- -----------------------------------------------------------------------------*/
-__RAM_BASE = 0x20000000;
-__RAM_SIZE = 0x0000C000;
-
 /*--------------------- Stack / Heap Configuration ----------------------------
   <h> Stack / Heap Configuration
     <o0> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
@@ -65,8 +47,10 @@ __STACKSEAL_SIZE = 0;
 
 MEMORY
 {
-  FLASH (rx)  : ORIGIN = __ROM_BASE, LENGTH = __ROM_SIZE
-  RAM   (rwx) : ORIGIN = __RAM_BASE, LENGTH = __RAM_SIZE
+  FLASH     (rx)  : ORIGIN = 0x00000000, LENGTH = 0x00020000
+  RAM       (rwx) : ORIGIN = 0x20000000, LENGTH = 0x0000C000
+  SRAMX     (rwx) : ORIGIN = 0x04000000, LENGTH = 0x00004000
+  USB_SRAM  (rw)  : ORIGIN = 0x20010000, LENGTH = 0x00004000
 }
 
 /* Linker script to place sections and symbol values. Should be used together

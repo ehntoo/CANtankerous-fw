@@ -10,15 +10,13 @@ set(CMAKE_EXECUTABLE_SUFFIX_C ".elf")
 
 # Set source files
 target_sources(cantankerous-fw PUBLIC
-    "${ProjDirPath}/cantankerous-fw.c"
+    "${ProjDirPath}/cantankerous_fw.c"
+    "${ProjDirPath}/assert_impl.c"
     "${ProjDirPath}/board/clock_config.c"
     "${ProjDirPath}/board/pin_mux.c"
     "${SdkDir}/devices/LPC5514/drivers/fsl_clock.c"
     "${SdkDir}/drivers/common/fsl_common_arm.c"
-    # "${ProjDirPath}/startup.S"
-    # "${ProjDirPath}/irq.c"
     "${ProjDirPath}/startup.c"
-    # "${SdkDir}/devices/LPC5514/system_LPC5514.c"
     "${ProjDirPath}/system_LPC5514.c"
     "${SdkDir}/drivers/lpc_gpio/fsl_gpio.c"
     "${ProjDirPath}/middleware/usb/device/usb_device_lpcip3511.c"
@@ -87,7 +85,6 @@ target_link_options(cantankerous-fw PRIVATE
     -Wl,-check-sections
     -Wl,-fatal-warnings
     -Wl,--gc-sections
-    -Wl,--defsym=__stack_size__=0x800
     "-Wl,-Map=$<TARGET_FILE_DIR:cantankerous-fw>/cantankerous-fw.map"
 )
 
