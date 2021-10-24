@@ -4,12 +4,13 @@ set(CMAKE_SYSTEM_PROCESSOR arm)
 set(CMAKE_C_COMPILER arm-none-eabi-gcc)
 set(CMAKE_CXX_COMPILER arm-none-eabi-g++)
 set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
-set(CMAKE_LINKER arm-none-eabi-gcc-ld)
 set(CMAKE_AR arm-none-eabi-gcc-ar)
 
-set(CMAKE_C_FLAGS "-Os -fwhole-program --specs=nosys.specs --specs=nano.specs")
-set(CMAKE_CXX_FLAGS ${CMAKE_C_FLAGS})
-set(CMAKE_LD_FLAGS "-Wl,--print-memory-usage")
+set(CMAKE_C_FLAGS "-fwhole-program --specs=nosys.specs --specs=nano.specs")
+set(CMAKE_C_FLAGS_DEBUG "-Og")
+set(CMAKE_C_FLAGS_RELEASE "-O3")
+set(CMAKE_C_FLAGS_MINSIZEREL "-Os")
+set(CMAKE_EXE_LINKER_FLAGS "-Wl,--print-memory-usage")
 
 # Do not try to compile for the host
 set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)

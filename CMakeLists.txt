@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.19)
 
-project(cantankerous-fw LANGUAGES C CXX ASM)
+project(cantankerous-fw LANGUAGES C ASM)
 add_executable(cantankerous-fw)
 
 set(SdkDir ${CMAKE_CURRENT_SOURCE_DIR}/mcux-sdk)
@@ -65,8 +65,6 @@ target_compile_options(cantankerous-fw PRIVATE
     -flto
     -fno-builtin
     -mno-unaligned-access
-    $<$<COMPILE_LANGUAGE:CXX>:-fno-rtti>
-    $<$<COMPILE_LANGUAGE:CXX>:-fno-exceptions>
 )
 
 target_link_options(cantankerous-fw PRIVATE

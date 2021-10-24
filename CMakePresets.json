@@ -7,28 +7,51 @@
   },
   "configurePresets": [
     {
-      "name": "default",
-      "displayName": "Default Config",
-      "description": "Default build using Ninja generator",
+      "name": "gcc",
       "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build/default",
-      "toolchainFile": "${sourceDir}/arm-gcc-toolchain.cmake"
+      "binaryDir": "${sourceDir}/build/gcc-debug",
+      "toolchainFile": "${sourceDir}/arm-gcc-toolchain.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    }, {
+      "name": "gcc-rel",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/gcc-rel",
+      "toolchainFile": "${sourceDir}/arm-gcc-toolchain.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "MinSizeRel"
+      }
     }, {
       "name": "clang",
-      "displayName": "Clang Toolchain",
-      "description": "Build using Clang instead of GCC",
       "generator": "Ninja",
-      "binaryDir": "${sourceDir}/build/clang",
-      "toolchainFile": "${sourceDir}/arm-clang-toolchain.cmake"
+      "binaryDir": "${sourceDir}/build/clang-debug",
+      "toolchainFile": "${sourceDir}/arm-clang-toolchain.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug"
+      }
+    }, {
+      "name": "clang-rel",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/clang-rel",
+      "toolchainFile": "${sourceDir}/arm-clang-toolchain.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "MinSizeRel"
+      }
     }
-  ],
-  "buildPresets": [
+  ], "buildPresets": [
     {
-      "name": "default",
-      "configurePreset": "default"
+      "name": "gcc",
+      "configurePreset": "gcc"
     }, {
       "name": "clang",
       "configurePreset": "clang"
+    }, {
+      "name": "gcc-rel",
+      "configurePreset": "gcc-rel"
+    }, {
+      "name": "clang-rel",
+      "configurePreset": "clang-rel"
     }
   ]
 }

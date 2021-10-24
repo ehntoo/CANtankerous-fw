@@ -11,8 +11,11 @@ set(CMAKE_ASM_COMPILER clang)
 set(CMAKE_ASM_COMPILER_TARGET ${triple})
 set(CMAKE_AR llvm-ar)
 
-set(CMAKE_C_FLAGS "-Oz -nostdlib")
-set(CMAKE_CXX_FLAGS ${CMAKE_C_FLAGS})
+set(CMAKE_C_FLAGS "-nostdlib")
+set(CMAKE_C_FLAGS_DEBUG "-Og")
+set(CMAKE_C_FLAGS_RELEASE "-O3")
+set(CMAKE_C_FLAGS_MINSIZEREL "-Oz")
+# set(CMAKE_CXX_FLAGS ${CMAKE_C_FLAGS})
 set(CMAKE_ASM_FLAGS "-D_start=main")
 
 # Do not try to compile for the host
